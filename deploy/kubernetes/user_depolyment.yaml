@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user
+  labels:
+    service: user
+spec:
+  selector:
+    service: user
+  ports:
+    - name: grpc
+      port: 20001
+      protocol: TCP
+      targetPort: 20001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    service: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: user
+  template:
+    metadata:
+      labels:
+        service: user
+    spec:
+      initContainers:
+        - name: mysql-check
+          image: busybox:1.28
+          command: ['sh', '-c', 'until nslookup mysql; do echo waiting for mysql; sleep 10; done;']
+      containers:
+        - name: user
+          image: user
+          env:
+            - name: AVAILABLE_PORT
+              value: "20001"
+            - name: DATA_SOURCE_URL
+              value: "root:s3cr3t@tcp(mysql:3306)/orders?charset=utf8mb4&parseTime=True&loc=Local"
+          ports:
+            - containerPort: 20001

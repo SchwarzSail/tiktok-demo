@@ -1,0 +1,1 @@
+相关架构的简要说明位于[architecture.md](./doc/architecture.md)。
