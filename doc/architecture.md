@@ -8,7 +8,9 @@
 - service：也可以叫做 **application**， **core**等，意思就是业务逻辑层。
 - ports：本质上就是**接口**定义的地方，包括**数据库**， **消息队列**， **外部服务**（RPC）等。当然也包括**service**，目的是使得 handler 层和 service 解耦。
 - adapters：实现 ports 的所有具体类。实际上 service 也属于 adapter 的一种，单独拿出来 service 是为了体现 service 是架构**核心**的目的。
+- domain：定义在 service/domain 中，用于 service，dao 之间的对象操作。domain 中的数据为该微服务所**独有**。
 
+在 video 的 service 中，我们只关注于 domain 中的数据
 ## 项目结构
 ```bash
 .

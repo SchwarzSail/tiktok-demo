@@ -2,27 +2,34 @@ package db
 
 import (
 	"context"
-	"github.com/schwarzsail/tiktok/pkg/kitex_gen/model"
+	"github.com/schwarzsail/tiktok/internal/user/service/domain"
 	"gorm.io/gorm"
 )
 
-// User 数据库所操作的表
+// 数据库实体
 type User struct {
 	gorm.Model
 }
 
 type DBAdapter struct {
-	gorm *gorm.DB
+	db *gorm.DB
+}
+
+// 不太规范，这样写只是为了不报错
+func InitDBConnection() *gorm.DB {
+	return nil
 }
 
 func NewDBAdapter() *DBAdapter {
-	return &DBAdapter{}
+	return &DBAdapter{
+		db: InitDBConnection(),
+	}
 }
 
-func (d *DBAdapter) GetUser(ctx context.Context, id int64) (*model.User, error) {
+func (d *DBAdapter) GetUserByName(ctx context.Context, name string) (*domain.User, error) {
 	return nil, nil
 }
 
-func (d *DBAdapter) CreateUser(ctx context.Context, user *model.User) error {
-	return nil
+func (d *DBAdapter) CreateUser(ctx context.Context, user *domain.User) (*domain.User, error) {
+	return nil, nil
 }

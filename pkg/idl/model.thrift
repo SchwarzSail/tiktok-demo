@@ -11,9 +11,8 @@ struct User {
     1: optional string id
     2: required string username
     3: required string avatar_url
-    4: required string created_at
-    5: required string updated_at
-    6: required string deleted_at
+    4: required string email
+    5: required string phone
 }
 
 struct Video {

@@ -235,9 +235,8 @@ type User struct {
 	Id        *string `thrift:"id,1,optional" frugal:"1,optional,string" json:"id,omitempty"`
 	Username  string  `thrift:"username,2,required" frugal:"2,required,string" json:"username"`
 	AvatarUrl string  `thrift:"avatar_url,3,required" frugal:"3,required,string" json:"avatar_url"`
-	CreatedAt string  `thrift:"created_at,4,required" frugal:"4,required,string" json:"created_at"`
-	UpdatedAt string  `thrift:"updated_at,5,required" frugal:"5,required,string" json:"updated_at"`
-	DeletedAt string  `thrift:"deleted_at,6,required" frugal:"6,required,string" json:"deleted_at"`
+	Email     string  `thrift:"email,4,required" frugal:"4,required,string" json:"email"`
+	Phone     string  `thrift:"phone,5,required" frugal:"5,required,string" json:"phone"`
 }
 
 func NewUser() *User {
@@ -264,16 +263,12 @@ func (p *User) GetAvatarUrl() (v string) {
 	return p.AvatarUrl
 }
 
-func (p *User) GetCreatedAt() (v string) {
-	return p.CreatedAt
+func (p *User) GetEmail() (v string) {
+	return p.Email
 }
 
-func (p *User) GetUpdatedAt() (v string) {
-	return p.UpdatedAt
-}
-
-func (p *User) GetDeletedAt() (v string) {
-	return p.DeletedAt
+func (p *User) GetPhone() (v string) {
+	return p.Phone
 }
 func (p *User) SetId(val *string) {
 	p.Id = val
@@ -284,23 +279,19 @@ func (p *User) SetUsername(val string) {
 func (p *User) SetAvatarUrl(val string) {
 	p.AvatarUrl = val
 }
-func (p *User) SetCreatedAt(val string) {
-	p.CreatedAt = val
+func (p *User) SetEmail(val string) {
+	p.Email = val
 }
-func (p *User) SetUpdatedAt(val string) {
-	p.UpdatedAt = val
-}
-func (p *User) SetDeletedAt(val string) {
-	p.DeletedAt = val
+func (p *User) SetPhone(val string) {
+	p.Phone = val
 }
 
 var fieldIDToName_User = map[int16]string{
 	1: "id",
 	2: "username",
 	3: "avatar_url",
-	4: "created_at",
-	5: "updated_at",
-	6: "deleted_at",
+	4: "email",
+	5: "phone",
 }
 
 func (p *User) IsSetId() bool {
@@ -313,9 +304,8 @@ func (p *User) Read(iprot thrift.TProtocol) (err error) {
 	var fieldId int16
 	var issetUsername bool = false
 	var issetAvatarUrl bool = false
-	var issetCreatedAt bool = false
-	var issetUpdatedAt bool = false
-	var issetDeletedAt bool = false
+	var issetEmail bool = false
+	var issetPhone bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -362,7 +352,7 @@ func (p *User) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField4(iprot); err != nil {
 					goto ReadFieldError
 				}
-				issetCreatedAt = true
+				issetEmail = true
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
 				goto SkipFieldError
 			}
@@ -371,16 +361,7 @@ func (p *User) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField5(iprot); err != nil {
 					goto ReadFieldError
 				}
-				issetUpdatedAt = true
-			} else if err = iprot.Skip(fieldTypeId); err != nil {
-				goto SkipFieldError
-			}
-		case 6:
-			if fieldTypeId == thrift.STRING {
-				if err = p.ReadField6(iprot); err != nil {
-					goto ReadFieldError
-				}
-				issetDeletedAt = true
+				issetPhone = true
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
 				goto SkipFieldError
 			}
@@ -407,18 +388,13 @@ func (p *User) Read(iprot thrift.TProtocol) (err error) {
 		goto RequiredFieldNotSetError
 	}
 
-	if !issetCreatedAt {
+	if !issetEmail {
 		fieldId = 4
 		goto RequiredFieldNotSetError
 	}
 
-	if !issetUpdatedAt {
+	if !issetPhone {
 		fieldId = 5
-		goto RequiredFieldNotSetError
-	}
-
-	if !issetDeletedAt {
-		fieldId = 6
 		goto RequiredFieldNotSetError
 	}
 	return nil
@@ -480,7 +456,7 @@ func (p *User) ReadField4(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.CreatedAt = _field
+	p.Email = _field
 	return nil
 }
 func (p *User) ReadField5(iprot thrift.TProtocol) error {
@@ -491,18 +467,7 @@ func (p *User) ReadField5(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.UpdatedAt = _field
-	return nil
-}
-func (p *User) ReadField6(iprot thrift.TProtocol) error {
-
-	var _field string
-	if v, err := iprot.ReadString(); err != nil {
-		return err
-	} else {
-		_field = v
-	}
-	p.DeletedAt = _field
+	p.Phone = _field
 	return nil
 }
 
@@ -531,10 +496,6 @@ func (p *User) Write(oprot thrift.TProtocol) (err error) {
 		}
 		if err = p.writeField5(oprot); err != nil {
 			fieldId = 5
-			goto WriteFieldError
-		}
-		if err = p.writeField6(oprot); err != nil {
-			fieldId = 6
 			goto WriteFieldError
 		}
 	}
@@ -609,10 +570,10 @@ WriteFieldEndError:
 }
 
 func (p *User) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("created_at", thrift.STRING, 4); err != nil {
+	if err = oprot.WriteFieldBegin("email", thrift.STRING, 4); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.CreatedAt); err != nil {
+	if err := oprot.WriteString(p.Email); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -626,10 +587,10 @@ WriteFieldEndError:
 }
 
 func (p *User) writeField5(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("updated_at", thrift.STRING, 5); err != nil {
+	if err = oprot.WriteFieldBegin("phone", thrift.STRING, 5); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.UpdatedAt); err != nil {
+	if err := oprot.WriteString(p.Phone); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -640,23 +601,6 @@ WriteFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 5 begin error: ", p), err)
 WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 5 end error: ", p), err)
-}
-
-func (p *User) writeField6(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("deleted_at", thrift.STRING, 6); err != nil {
-		goto WriteFieldBeginError
-	}
-	if err := oprot.WriteString(p.DeletedAt); err != nil {
-		return err
-	}
-	if err = oprot.WriteFieldEnd(); err != nil {
-		goto WriteFieldEndError
-	}
-	return nil
-WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 6 begin error: ", p), err)
-WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 6 end error: ", p), err)
 }
 
 func (p *User) String() string {
@@ -682,13 +626,10 @@ func (p *User) DeepEqual(ano *User) bool {
 	if !p.Field3DeepEqual(ano.AvatarUrl) {
 		return false
 	}
-	if !p.Field4DeepEqual(ano.CreatedAt) {
+	if !p.Field4DeepEqual(ano.Email) {
 		return false
 	}
-	if !p.Field5DeepEqual(ano.UpdatedAt) {
-		return false
-	}
-	if !p.Field6DeepEqual(ano.DeletedAt) {
+	if !p.Field5DeepEqual(ano.Phone) {
 		return false
 	}
 	return true
@@ -722,21 +663,14 @@ func (p *User) Field3DeepEqual(src string) bool {
 }
 func (p *User) Field4DeepEqual(src string) bool {
 
-	if strings.Compare(p.CreatedAt, src) != 0 {
+	if strings.Compare(p.Email, src) != 0 {
 		return false
 	}
 	return true
 }
 func (p *User) Field5DeepEqual(src string) bool {
 
-	if strings.Compare(p.UpdatedAt, src) != 0 {
-		return false
-	}
-	return true
-}
-func (p *User) Field6DeepEqual(src string) bool {
-
-	if strings.Compare(p.DeletedAt, src) != 0 {
+	if strings.Compare(p.Phone, src) != 0 {
 		return false
 	}
 	return true

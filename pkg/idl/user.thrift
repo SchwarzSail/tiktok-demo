@@ -5,16 +5,21 @@ include "model.thrift"
 struct RegisterRequest {
     1: required string username
     2: required string password
+    3: required string email
+    4: required string phone
 }
 
 struct RegisterResponse {
     1: required model.BaseResp resp
+    2: optional model.User user
 }
 
 //登录
 struct LoginRequest {
-    1: required string username
+    1: optional string username
     2: required string password
+    3: optional string email
+    4: optional string phone
 }
 
 struct LoginResponse {

@@ -7,8 +7,7 @@ import (
 	"github.com/schwarzsail/tiktok/config"
 	"github.com/schwarzsail/tiktok/internal/user/adapter/db"
 	"github.com/schwarzsail/tiktok/internal/user/adapter/rpc"
-	"github.com/schwarzsail/tiktok/internal/user/service"
-	core "github.com/schwarzsail/tiktok/internal/user/service"
+	service "github.com/schwarzsail/tiktok/internal/user/service/core"
 	"github.com/schwarzsail/tiktok/pkg/kitex_gen/user/userservice"
 	"github.com/schwarzsail/tiktok/pkg/logger"
 	"net"
@@ -20,14 +19,14 @@ var (
 	serviceAddr        string
 	serviceName        = "user"
 	dbAdapter          *db.DBAdapter
-	userServiceAdapter *service.UserService
+	userServiceAdapter *service.CoreService
 )
 
 func init() {
 	etcdAddr = config.GetEtcdAddr()
 	serviceAddr = "0.0.0.0" + strconv.Itoa(config.GetAvailablePort())
 	dbAdapter = db.NewDBAdapter()
-	userServiceAdapter = core.NewUserService(dbAdapter)
+	userServiceAdapter = service.NewCoreService(dbAdapter)
 }
 
 func main() {
@@ -40,7 +39,7 @@ func main() {
 		logger.Fatalf("User: listen addr failed %v", err)
 	}
 	svr := userservice.NewServer(
-		rpc.NewUserServerImpl(userServiceAdapter),
+		rpc.NewUserHandler(userServiceAdapter),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
 			ServiceName: serviceName,
 		}),
