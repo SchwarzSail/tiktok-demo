@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"context"
+
 	"github.com/schwarzsail/tiktok/internal/user/domain"
 	"github.com/schwarzsail/tiktok/internal/user/pack"
 	"github.com/schwarzsail/tiktok/internal/user/ports"
@@ -29,7 +30,6 @@ func (s *UserHandler) Register(ctx context.Context, req *user.RegisterRequest) (
 		Email:    req.Email,
 		Phone:    req.Phone,
 	})
-
 	if err != nil {
 		// 错误处理
 	}

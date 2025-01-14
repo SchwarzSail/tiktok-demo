@@ -5,9 +5,10 @@ package user
 import (
 	"context"
 	"fmt"
+	"strings"
+
 	thrift "github.com/cloudwego/kitex/pkg/protocol/bthrift/apache"
 	"github.com/schwarzsail/tiktok/pkg/kitex_gen/model"
-	"strings"
 )
 
 type RegisterRequest struct {

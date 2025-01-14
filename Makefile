@@ -20,3 +20,7 @@ rpc-gen-%:
 .PHONY: lint
 lint:
 	golangci-lint run --config=./.golangci.yml
+
+.PHONY: fmt
+fmt:
+	gofumpt -l -w .

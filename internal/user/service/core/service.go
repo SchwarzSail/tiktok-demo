@@ -5,7 +5,7 @@ import "github.com/schwarzsail/tiktok/internal/user/ports"
 // CoreService 核心业务，实现 ports 定义的接口
 type CoreService struct {
 	db ports.DBPort
-	//rpc client
+	// rpc client
 }
 
 // NewCoreService 创建核心业务

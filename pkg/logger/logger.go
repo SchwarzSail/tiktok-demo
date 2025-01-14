@@ -1,11 +1,12 @@
 package logger
 
 import (
+	"os"
+
 	"github.com/cloudwego/kitex/pkg/klog"
 	kitexzap "github.com/kitex-contrib/obs-opentelemetry/logging/zap"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"os"
 )
 
 var loggerObj *kitexzap.Logger

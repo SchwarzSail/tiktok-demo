@@ -1,6 +1,9 @@
 package main
 
 import (
+	"net"
+	"strconv"
+
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	etcd "github.com/kitex-contrib/registry-etcd"
@@ -10,8 +13,6 @@ import (
 	service "github.com/schwarzsail/tiktok/internal/user/service/core"
 	"github.com/schwarzsail/tiktok/pkg/kitex_gen/user/userservice"
 	"github.com/schwarzsail/tiktok/pkg/logger"
-	"net"
-	"strconv"
 )
 
 var (
