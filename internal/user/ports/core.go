@@ -2,7 +2,7 @@ package ports
 
 import (
 	"context"
-	"github.com/schwarzsail/tiktok/internal/user/service/domain"
+	"github.com/schwarzsail/tiktok/internal/user/domain"
 )
 
 // CorePort 定义核心业务接口，暴露给 rpc（handler 层）使用

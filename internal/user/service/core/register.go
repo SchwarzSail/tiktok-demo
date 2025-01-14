@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	"github.com/schwarzsail/tiktok/internal/user/service/domain"
+	"github.com/schwarzsail/tiktok/internal/user/domain"
 )
 
 func (s *CoreService) RegisterUser(ctx context.Context, user *domain.User) (*domain.User, error) {

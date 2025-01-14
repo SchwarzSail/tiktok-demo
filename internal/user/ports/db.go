@@ -2,7 +2,7 @@ package ports
 
 import (
 	"context"
-	"github.com/schwarzsail/tiktok/internal/user/service/domain"
+	"github.com/schwarzsail/tiktok/internal/user/domain"
 )
 
 // DBPort 定义数据库接口，暴露给 core（service）使用

@@ -2,7 +2,7 @@ package db
 
 import (
 	"context"
-	"github.com/schwarzsail/tiktok/internal/user/service/domain"
+	"github.com/schwarzsail/tiktok/internal/user/domain"
 	"gorm.io/gorm"
 )
 

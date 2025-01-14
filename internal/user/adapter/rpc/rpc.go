@@ -2,9 +2,9 @@ package rpc
 
 import (
 	"context"
+	"github.com/schwarzsail/tiktok/internal/user/domain"
 	"github.com/schwarzsail/tiktok/internal/user/pack"
 	"github.com/schwarzsail/tiktok/internal/user/ports"
-	"github.com/schwarzsail/tiktok/internal/user/service/domain"
 	"github.com/schwarzsail/tiktok/pkg/kitex_gen/user"
 )
 
